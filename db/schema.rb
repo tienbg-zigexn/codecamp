@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_155434) do
     t.integer "location_id", null: false
     t.float "current_temperature"
     t.string "current_description"
-    t.json "forecast_data"
+    t.text "forecast_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_weather_records_on_location_id"

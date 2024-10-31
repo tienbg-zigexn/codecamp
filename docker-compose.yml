@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/app
+      - bundle_cache:/bundle
+    ports:
+      - "3333:3000"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    # ports:
+    #   - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  bundle_cache:
+  redis_data:

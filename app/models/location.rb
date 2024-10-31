@@ -1,13 +1,4 @@
 class Location < ApplicationRecord
-  include PgSearch::Model
-
-  # Enable full-text search across name and country
-  pg_search_scope :search_by_name_and_country,
-    against: [:name, :country],
-    using: {
-      tsearch: { prefix: true }
-    }
-
   # Validations
   validates :name, presence: true
   validates :latitude, presence: true, numericality: true
@@ -16,4 +7,8 @@ class Location < ApplicationRecord
 
   # Associations for weather data
   has_many :weather_records, dependent: :destroy
+
+  def self.search(query)
+    where("name LIKE ? OR country LIKE ?", "%#{query}%", "%#{query}%")
+  end
 end

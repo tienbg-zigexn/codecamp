@@ -59,8 +59,7 @@ group :test do
 end
 
 gem "faraday"  # For API requests
-gem "dotenv-rails"  # For managing environment variables
-gem "geocoder"  # For location-based features
 gem "sidekiq"  # For background jobs
 gem "sidekiq-scheduler"  # For scheduled jobs
-gem "pg_search"  # For advanced search functionality
+gem "redis"
+gem "searchkick"

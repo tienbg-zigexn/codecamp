@@ -5,12 +5,12 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
-    @weather_record = @location.weather_records.order(created_at: :desc).first
+    @weather_record = @location.weather_records.last
   end
 
   def search
     @query = params[:query]
-    @locations = Location.search_by_name_and_country(@query).limit(10)
+    @locations = Location.search(@query).limit(10)
 
     respond_to do |format|
       format.html
