@@ -1,2 +1,50 @@
-<h1>Locations#index</h1>
-<p>Find me in app/views/locations/index.html.erb</p>
+<article>
+  <header>
+    <h2>Weather Locations</h2>
+
+    <%= form_with url: search_locations_path, method: :get do |f| %>
+      <%= f.text_field :query, placeholder: "Search locations..." %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </header>
+
+  <div class="locations-grid">
+    <% @locations.each do |location| %>
+      <article>
+        <header>
+          <h3><%= link_to location.name, location_path(location) %></h3>
+          <p><mark><%= location.country %></mark></p>
+        </header>
+
+        <% if location.weather_records.last %>
+          <p>
+            <strong><%= location.weather_records.last.current_temperature.round %>°C</strong>
+            <br>
+            <%= location.weather_records.last.current_description %>
+          </p>
+          <footer>
+            <small>
+              Updated
+              <%= time_ago_in_words(location.weather_records.last.created_at) %>
+              ago
+            </small>
+          </footer>
+        <% else %>
+          <p><em>No weather data available</em></p>
+        <% end %>
+      </article>
+    <% end %>
+  </div>
+</article>
+
+<style>
+  .locations-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .locations-grid article {
+    margin: 0;
+  }
+</style>

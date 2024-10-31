@@ -7,4 +7,6 @@ Rails.application.routes.draw do
       get "search"
     end
   end
+
+  root 'pages#index'
 end

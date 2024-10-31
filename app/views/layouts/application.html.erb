@@ -18,6 +18,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Weather Forecast</h1>
+      <nav>
+        <%= link_to "Home", root_path %>
+        <%= link_to "Locations", locations_path %>
+        <%= link_to "Search", search_locations_path %>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p>Weather data provided by OpenMeteo</p>
+    </footer>
   </body>
 </html>

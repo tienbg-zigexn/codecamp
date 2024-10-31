@@ -1,2 +1,74 @@
-<h1>Locations#show</h1>
-<p>Find me in app/views/locations/show.html.erb</p>
+<article>
+  <header>
+    <p><%= link_to "← Back to Locations", locations_path %></p>
+    <h2><%= @location.name %></h2>
+    <p><mark><%= @location.country %></mark></p>
+    <small>Coordinates:
+      <%= @location.latitude %>,
+      <%= @location.longitude %></small>
+  </header>
+
+  <% if @weather_record %>
+    <section>
+      <h3>Current Weather</h3>
+      <div class="current-weather">
+        <p>
+          <strong class="temperature">
+            <%= @weather_record.current_temperature.round %>°C
+          </strong>
+          <br>
+          <%= @weather_record.current_description %>
+        </p>
+        <p>
+          <small>
+            Last updated:
+            <%= @weather_record.created_at.strftime("%B %d, %Y %H:%M") %>
+          </small>
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h3>7-Day Forecast</h3>
+      <div class="forecast-grid">
+        <% @weather_record.forecast_data.each do |forecast| %>
+          <article>
+            <h4><%= Date.parse(forecast["date"].to_s).strftime("%a, %b %d") %></h4>
+            <p>
+              <strong><%= forecast["max_temperature"].round %>°</strong>
+              /
+              <%= forecast["min_temperature"].round %>°
+            </p>
+            <p><small><%= forecast["description"] %></small></p>
+          </article>
+        <% end %>
+      </div>
+    </section>
+  <% else %>
+    <p><em>No weather data available for this location</em></p>
+  <% end %>
+</article>
+
+<style>
+  .temperature {
+    font-size: 2.5rem;
+  }
+
+  .forecast-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .forecast-grid article {
+    margin: 0;
+    text-align: center;
+  }
+
+  .current-weather {
+    text-align: center;
+    padding: 2rem;
+    background: var(--accent-bg);
+    border-radius: var(--border-radius);
+  }
+</style>

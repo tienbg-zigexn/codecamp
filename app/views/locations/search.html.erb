@@ -1,14 +1,38 @@
-<h1>Location Search</h1>
+<article>
+  <header>
+    <h2>Search Results</h2>
+    <%= form_with url: search_locations_path, method: :get do |f| %>
+      <%= f.text_field :query, 
+          placeholder: "Search locations...", 
+          value: params[:query] %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </header>
 
-<%= form_with(url: search_locations_path, method: :get, local: true) do |f| %>
-  <%= f.text_field :query, placeholder: 'Search locations...' %>
-  <%= f.submit 'Search' %>
-<% end %>
-
-<div id="search-results">
-  <% @locations.each do |location| %>
-    <div>
-      <%= link_to "#{location.name}, #{location.country}", location_path(location) %>
+  <% if @locations.any? %>
+    <div class="search-results">
+      <% @locations.each do |location| %>
+        <article>
+          <h3><%= link_to location.name, location_path(location) %></h3>
+          <p><mark><%= location.country %></mark></p>
+          
+          <% if location.weather_records.last %>
+            <p>
+              <strong><%= location.weather_records.last.current_temperature.round %>°C</strong>
+              -
+              <%= location.weather_records.last.current_description %>
+            </p>
+          <% end %>
+        </article>
+      <% end %>
     </div>
+  <% else %>
+    <p><em>No locations found matching "<%= params[:query] %>"</em></p>
   <% end %>
-</div>
+</article>
+
+<style>
+  .search-results article {
+    margin-bottom: 1rem;
+  }
+</style>
