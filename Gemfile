@@ -43,6 +43,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "byebug"
 end
 
 group :development do
@@ -55,3 +57,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "faraday"  # For API requests
+gem "dotenv-rails"  # For managing environment variables
+gem "geocoder"  # For location-based features
+gem "sidekiq"  # For background jobs
+gem "sidekiq-scheduler"  # For scheduled jobs
+gem "pg_search"  # For advanced search functionality
