@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location: one
+  current_temperature: 1.5
+  current_description: MyString
+  forecast_data: 
+
+two:
+  location: two
+  current_temperature: 1.5
+  current_description: MyString
+  forecast_data: 
