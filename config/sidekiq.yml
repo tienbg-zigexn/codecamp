@@ -1,0 +1,4 @@
+:schedule:
+  weather_refresh_job:
+    cron: '* * * * *'  # Every 1 minute
+    class: WeatherRefreshJob
