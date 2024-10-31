@@ -1,31 +1,35 @@
 module Weather
   class OpenMeteoService
+    require 'net/http'
+
+    BASE_URL = "https://api.open-meteo.com/v1/forecast".freeze
     def initialize(location)
       @location = location
-      @connection = Faraday.new(url: "https://api.open-meteo.com/v1")
     end
 
     def current_weather
-      response = @connection.get("/forecast", {
-        latitude: @location.latitude,
-        longitude: @location.longitude,
-        current: [ "temperature_2m", "relative_humidity_2m", "weather_code" ],
-        timezone: "auto"
-      })
+      latitude = @location.latitude
+      longitude = @location.longitude
+      current = [ "temperature_2m", "relative_humidity_2m", "weather_code" ]
+      timezone = "auto"
 
-      data = JSON.parse(response.body)
+      url = URI("#{BASE_URL}?latitude=#{latitude}&longitude=#{longitude}&timezone=#{timezone}&current=#{current.join(",")}")
+      response = Net::HTTP.get(url)
+
+      data = JSON.parse(response)
       interpret_current_weather(data)
     end
 
     def seven_day_forecast
-      response = @connection.get("/forecast", {
-        latitude: @location.latitude,
-        longitude: @location.longitude,
-        daily: [ "weather_code", "temperature_2m_max", "temperature_2m_min" ],
-        timezone: "auto"
-      })
+      latitude = @location.latitude
+      longitude = @location.longitude
+      daily = [ "weather_code", "temperature_2m_max", "temperature_2m_min" ]
+      timezone = "auto"
 
-      data = JSON.parse(response.body)
+      url = URI("#{BASE_URL}?latitude=#{latitude}&longitude=#{longitude}&timezone=#{timezone}&daily=#{daily.join(",")}")
+      response = Net::HTTP.get(url)
+
+      data = JSON.parse(response)
       interpret_forecast(data)
     end
 

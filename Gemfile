@@ -58,7 +58,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "faraday"  # For API requests
 gem "sidekiq"  # For background jobs
 gem "sidekiq-scheduler"  # For scheduled jobs
 gem "redis"
