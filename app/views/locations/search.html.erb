@@ -1,0 +1,14 @@
+<h1>Location Search</h1>
+
+<%= form_with(url: search_locations_path, method: :get, local: true) do |f| %>
+  <%= f.text_field :query, placeholder: 'Search locations...' %>
+  <%= f.submit 'Search' %>
+<% end %>
+
+<div id="search-results">
+  <% @locations.each do |location| %>
+    <div>
+      <%= link_to "#{location.name}, #{location.country}", location_path(location) %>
+    </div>
+  <% end %>
+</div>
