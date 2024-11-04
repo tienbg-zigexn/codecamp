@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   def index
-    @locations = Location.all
+    @locations = Location.includes(:weather_records).all
   end
 
   def show
