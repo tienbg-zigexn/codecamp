@@ -14,6 +14,8 @@ locations = [
   { name: 'Hanoi', country: 'Vietnam', latitude: 21.0278, longitude: 105.8342 },
   { name: 'Da Nang', country: 'Vietnam', latitude: 16.0678, longitude: 108.2203 },
   { name: 'Ho Chi Minh', country: 'Vietnam', latitude: 10.8231, longitude: 106.6297 },
+  { name: 'Thai Binh', country: 'Vietnam', latitude: 20.45, longitude: 106.333 },
+  { name: 'Hai Phong', country: 'Vietnam', latitude: 20.8667, longitude: 106.6667 },
   # Add more cities
 ]
 
