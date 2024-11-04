@@ -59,16 +59,11 @@ module Weather
     end
 
     def weather_code_to_description(code)
-      # OpenMeteo Weather Code Interpretation
-      case code
-      when 0 then "Clear sky"
-      when 1, 2, 3 then "Partly cloudy"
-      when 45, 48 then "Foggy"
-      when 51, 53, 55 then "Drizzle"
-      when 61, 63, 65 then "Rainy"
-      when 71, 73, 75 then "Snowy"
-      else "Unknown conditions"
-      end
+      weather_code_data = YAML.load_file(Rails.root.join("data/weather_codes.yml"))
+      description = weather_code_data[code.to_s]
+      return "Unknown conditions" unless description
+
+      description
     end
   end
 end
