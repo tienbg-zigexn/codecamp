@@ -1,5 +1,7 @@
 services:
   web:
+    stdin_open: true
+    tty: true
     build:
       context: .
       dockerfile: ./Dockerfile.dev
@@ -16,8 +18,8 @@ services:
 
   redis:
     image: redis:alpine
-    # ports:
-    #   - "6379:6379"
+    ports:
+      - "36379:6379"
     volumes:
       - redis_data:/data
 
