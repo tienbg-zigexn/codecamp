@@ -1,9 +1,11 @@
-class WeatherRefreshJob < ApplicationJob
-  queue_as :default
+class WeatherRefreshJob
+  include Sidekiq::Job
 
   def perform
     Location.find_each do |location|
       refresh_location_weather(location)
+      # WeatherRefreshChannel.broadcast_to(location, location)
+      ActionCable.server.broadcast "weather_refresh_channel_#{location.name}", location
     end
   end
 

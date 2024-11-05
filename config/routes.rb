@@ -8,5 +8,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'pages#index'
+  root "pages#index"
 end
