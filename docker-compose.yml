@@ -1,28 +1,18 @@
 services:
-  web:
-    stdin_open: true
+  app:
     tty: true
+    stdin_open: true
     build:
       context: .
-      dockerfile: ./Dockerfile.dev
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+      dockerfile: Dockerfile.dev
     volumes:
-      - .:/rails
-      - bundle_cache:/bundle
+      - .:/app
     ports:
       - "3333:3000"
-    environment:
-      - REDIS_URL=redis://redis:6379/0
     depends_on:
       - redis
-
+    environment:
+      - RAILS_ENV=development
+      - REDIS_HOST=redis
   redis:
     image: redis:alpine
-    ports:
-      - "36379:6379"
-    volumes:
-      - redis_data:/data
-
-volumes:
-  bundle_cache:
-  redis_data:
