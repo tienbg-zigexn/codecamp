@@ -3,6 +3,7 @@ services:
     tty: true
     stdin_open: true
     build:
+      context: .
       dockerfile: Dockerfile.dev
     volumes:
       - .:/app

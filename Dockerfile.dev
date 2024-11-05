@@ -8,4 +8,4 @@ RUN bundle install
 
 ENTRYPOINT ["./bin/docker-entrypoint-dev"]
 
-CMD ["./bin/rails", "server"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
