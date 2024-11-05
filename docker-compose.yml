@@ -1,0 +1,17 @@
+services:
+  app:
+    tty: true
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+    ports:
+      - "3333:3000"
+    depends_on:
+      - redis
+    environment:
+      - RAILS_ENV=development
+      - REDIS_HOST=redis
+  redis:
+    image: redis:alpine

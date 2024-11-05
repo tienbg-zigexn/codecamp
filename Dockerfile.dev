@@ -1,0 +1,11 @@
+FROM ruby:3.3.5
+
+ENV DIR /app
+WORKDIR $DIR
+ADD . $DIR
+
+RUN bundle install
+
+ENTRYPOINT ["./bin/docker-entrypoint-dev"]
+
+CMD ["./bin/rails", "server"]
