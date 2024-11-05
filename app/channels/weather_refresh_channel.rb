@@ -1,6 +1,7 @@
 class WeatherRefreshChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "weather_refresh_channel_#{params[:location]}"
+    location = Location.find(params[:location])
+    stream_for location
   end
 
   def unsubscribed

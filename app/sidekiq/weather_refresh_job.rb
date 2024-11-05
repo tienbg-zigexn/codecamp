@@ -4,8 +4,8 @@ class WeatherRefreshJob
   def perform
     Location.find_each do |location|
       refresh_location_weather(location)
-      # WeatherRefreshChannel.broadcast_to(location, location)
-      ActionCable.server.broadcast "weather_refresh_channel_#{location.name}", location
+      WeatherRefreshChannel.broadcast_to(location, location.weather_records.last)
+      # ActionCable.server.broadcast "weather_refresh_channel_#{location.name}", location
     end
   end
 
