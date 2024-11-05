@@ -14,5 +14,6 @@ services:
     environment:
       - RAILS_ENV=development
       - REDIS_HOST=redis
+      - REDIS_URL=redis://redis:6379/0
   redis:
     image: redis:alpine
