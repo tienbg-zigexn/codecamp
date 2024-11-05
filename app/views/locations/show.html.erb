@@ -22,7 +22,7 @@
         <p>
           <small>
             Last updated:
-            <%= @weather_record.created_at.strftime("%B %d, %Y %H:%M") %>
+            <%= @weather_record.created_at.in_time_zone('Asia/Saigon') %>
           </small>
         </p>
       </div>
