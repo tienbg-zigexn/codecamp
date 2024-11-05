@@ -60,7 +60,7 @@ module Weather
 
     def weather_code_to_description(code)
       weather_code_data = YAML.load_file(Rails.root.join("data/weather_codes.yml"))
-      description = weather_code_data[code.to_s]
+      description = weather_code_data[code.to_s]['day']['description']
       return "Unknown conditions" unless description
 
       description
