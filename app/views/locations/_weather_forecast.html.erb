@@ -1,0 +1,39 @@
+<% if weather_record %>
+  <section>
+    <h3>Current Weather</h3>
+    <div class="current-weather">
+      <p>
+        <strong class="temperature">
+          <%= weather_record.current_temperature.round %>°C
+        </strong>
+        <br>
+        <%= weather_record.current_description %>
+      </p>
+      <p>
+        <small>
+          Last updated:
+          <%= weather_record.updated_at.in_time_zone('Asia/Saigon') %>
+        </small>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h3>7-Day Forecast</h3>
+    <div class="forecast-grid">
+      <% weather_record.forecast_data.each do |forecast| %>
+        <article>
+          <h4><%= Date.parse(forecast["date"].to_s).strftime("%a, %b %d") %></h4>
+          <p>
+            <strong><%= forecast["max_temperature"].round %>°</strong>
+            /
+            <%= forecast["min_temperature"].round %>°
+          </p>
+          <p><small><%= forecast["description"] %></small></p>
+        </article>
+      <% end %>
+    </div>
+  </section>
+<% else %>
+  <p><em>No weather data available for this location</em></p>
+<% end %>

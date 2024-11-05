@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
 
       received(data) {
-        console.log(data);
+        document.getElementById('weather-forecast').innerHTML = data;
         console.log("WeatherRefreshChannel received");
       }
     });

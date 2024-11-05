@@ -4,8 +4,7 @@ class WeatherRefreshJob
   def perform
     Location.find_each do |location|
       refresh_location_weather(location)
-      WeatherRefreshChannel.broadcast_to(location, location.weather_records.last)
-      # ActionCable.server.broadcast "weather_refresh_channel_#{location.name}", location
+      WeatherRefreshChannel.broadcast_to(location, render_weather_forecast(location.weather_records.last))
     end
   end
 
@@ -25,7 +24,12 @@ class WeatherRefreshJob
     weather_record.update(
       current_temperature: current_weather[:temperature],
       current_description: current_weather[:description],
+      updated_at: Time.now,
       forecast_data: forecast
     )
+  end
+
+  def render_weather_forecast(record)
+    LocationsController.render(partial: "weather_forecast", locals: { weather_record: record })
   end
 end
