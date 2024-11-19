@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Redo 3rd" %></title>
+    <title><%= (yield(:title) + " | " unless yield(:title).blank?).to_s + "Codecamp" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -18,6 +18,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1><%= yield :title %></h1>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <%= debug params %>
+    </footer>
   </body>
 </html>
