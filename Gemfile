@@ -57,3 +57,5 @@ group :test do
 end
 
 gem "faker", "~> 3.5"
+
+gem "sass-rails", "~> 6.0"
