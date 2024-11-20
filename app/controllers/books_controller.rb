@@ -3,9 +3,9 @@ class BooksController < ApplicationController
 
   def index
     if params[:query].present?
-      @books = Book.search(params[:query]).includes(:reviews).ordered
+      @books = Book.search(params[:query]).ordered.limit(10).includes(:reviews)
     else
-      @books = Book.all.includes(:reviews).ordered
+      @books = Book.all.ordered.limit(10).includes(:reviews)
     end
   end
 
