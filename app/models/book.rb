@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
   has_many :reviews, dependent: :destroy
   validates_presence_of :title, :author, :description
+  validates :title, uniqueness: { scope: :author, case_sensitive: false }
 
   scope :ordered, -> { order(id: :desc) }
 
