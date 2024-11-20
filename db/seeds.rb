@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+10.times do
+  Book.create(
+    title: Faker::Book.title,
+    author: Faker::Book.author,
+    description: Faker::Lorem.paragraphs(number: 2).join('\n')
+  )
+end
