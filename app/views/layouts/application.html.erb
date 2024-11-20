@@ -19,12 +19,16 @@
 
   <body>
     <header>
+      <nav>
+        <%= render 'layouts/links' %>
+      </nav>
       <h1><%= yield :title %></h1>
     </header>
     <main>
       <%= yield %>
     </main>
     <footer>
+      <p>© Tien Bui Gia 2024 - All wrongs resreved</p>
       <%= debug params %>
     </footer>
   </body>
