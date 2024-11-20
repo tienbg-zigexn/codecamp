@@ -1,0 +1,9 @@
+<% content_for :title, "Book Details" %>
+<article>
+  <h2><%= @book.title %></h2>
+  <p>Author: <span><%= @book.author %></span></p>
+  <%= link_to "Edit", edit_book_path(@book), class: "button" %>
+  <%= button_to "Delete", @book, method: :delete %>
+
+  <p><%= @book.description %></p>
+</article>
