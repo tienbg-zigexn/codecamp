@@ -1,15 +1,9 @@
 <% content_for :title, "Book List" %>
 
+<%= render "search_form" %>
+
 <%= link_to "New Book", new_book_path, class: "button" %>
 
 <% @books.each do |book| %>
-  <%= link_to book do %>
-    <h3><%= book.title %></h3>
-  <% end %>
-  <p><%= book.author %></p>
-  <details>
-    <summary>Description</summary>
-    <p><%= truncate(book.description, length: 100) %></p>
-  </details>
-  <%= button_to "Delete", book, method: :delete %>
+  <%= render "book", book: book %>
 <% end %>

@@ -2,7 +2,11 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[show edit update destroy]
 
   def index
-    @books = Book.all.includes(:reviews)
+    if params[:query].present?
+      @books = Book.search(params[:query]).includes(:reviews)
+    else
+      @books = Book.all.includes(:reviews)
+    end
   end
 
   def new
