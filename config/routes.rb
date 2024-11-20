@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "pages#index"
   resources :books do
-    resources :reviews, only: %i[create destroy]
+    resources :reviews, only: %i[new create destroy]
   end
 
   # default rails generated

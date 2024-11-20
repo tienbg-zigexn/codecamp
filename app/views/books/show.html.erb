@@ -7,6 +7,13 @@
     <%= button_to "Delete", @book, method: :delete %>
     <%= link_to "Back", books_path, class: "button" %>
 
-    <p><%= @book.description %></p>
+    <details>
+      <summary>Description</summary>
+      <p><%= @book.description %></p>
+    </details>
+
+    <section>
+      <%= render "reviews/reviews" %>
+    </section>
   </article>
 <% end %>

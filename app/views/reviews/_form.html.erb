@@ -1,0 +1,6 @@
+<%= turbo_frame_tag dom_id(@book, "new_review") do %>
+  <%= form_with model: [@book, @review] do |f| %>
+    <%= f.text_area :content %>
+    <%= f.submit "Create Review" %>
+  <% end %>
+<% end %>

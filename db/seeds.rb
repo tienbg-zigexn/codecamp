@@ -8,10 +8,22 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-10.times do
-  Book.create(
-    title: Faker::Book.title,
-    author: Faker::Book.author,
-    description: Faker::Lorem.paragraphs(number: 2).join('\n')
-  )
+if Book.count < 10
+  10.times do
+    Book.create(
+      title: Faker::Book.title,
+      author: Faker::Book.author,
+      description: Faker::Lorem.paragraphs(number: 2).join('\n')
+    )
+  end
+end
+
+Book.all.each do |book|
+  if book.reviews.count < 5
+    5.times do
+      book.reviews.create(
+        content: Faker::Lorem.sentences(number: 2).join
+      )
+    end
+  end
 end

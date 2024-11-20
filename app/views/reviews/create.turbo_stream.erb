@@ -1,0 +1,2 @@
+<%= turbo_stream.append dom_id(@book, "reviews"), partial: "review", locals: { review: @review } %>
+<%= turbo_stream.remove dom_id(@book, "new_review") %>

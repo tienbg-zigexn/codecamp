@@ -1,0 +1,4 @@
+<%= turbo_frame_tag nested_dom_id(review.book, review) do %>
+  <p><%= review.content %></p>
+  <%= button_to 'Delete', book_review_path(review.book, review), method: :delete %>
+<% end %>
