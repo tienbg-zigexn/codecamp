@@ -1,2 +1,3 @@
 <%= turbo_stream.append dom_id(@book, "reviews"), partial: "review", locals: { review: @review } %>
 <%= turbo_stream.remove dom_id(@book, "new_review") %>
+<%= render_turbo_stream_flash_messages %>
