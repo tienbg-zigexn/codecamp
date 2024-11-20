@@ -1,4 +1,3 @@
-<%= form_with url: books_path, method: :get, data: { turbo_frame: "books" } do |f| %>
-  <%= f.text_field :query, placeholder: "Search books..." %>
-  <%= f.submit "Search" %>
+<%= form_with url: books_path, method: :get, data: { controller: "search", turbo_frame: "books" } do |f| %>
+  <%= f.text_field :query, placeholder: "Search books...", data: { action: "input->search#search" } %>
 <% end %>
