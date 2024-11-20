@@ -1,3 +1,2 @@
 <% content_for :title, "Edit Book" %>
-<%= render "form", action: "Update" %>
-<%= link_to "Cancel", @book, class: "button" %>
+<%= render "form", book: @book, action: "Update", tag: dom_id(@book) %>

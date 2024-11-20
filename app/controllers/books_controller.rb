@@ -3,9 +3,9 @@ class BooksController < ApplicationController
 
   def index
     if params[:query].present?
-      @books = Book.search(params[:query]).includes(:reviews)
+      @books = Book.search(params[:query]).includes(:reviews).ordered
     else
-      @books = Book.all.includes(:reviews)
+      @books = Book.all.includes(:reviews).ordered
     end
   end
 
@@ -23,7 +23,10 @@ class BooksController < ApplicationController
     @book = Book.build(book_params)
 
     if @book.save
-      redirect_to @book, notice: "Book was successfully created."
+      respond_to do |format|
+        format.html { redirect_to @book, notice: "Book was successfully created." }
+        format.turbo_stream
+      end
     else
       render :new, notice: "Book was not created.", status: :unprocessable_entity
     end
@@ -31,7 +34,10 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to @book, notice: "Book was successfully updated."
+      respond_to do |format|
+        format.html { redirect_to @book, notice: "Book was successfully updated." }
+        format.turbo_stream
+      end
     else
       render :edit, status: :unprocessable_entity, notice: "Book was not updated."
     end
@@ -39,7 +45,10 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_path, notice: "Book was successfully destroyed."
+    respond_to do |format|
+      format.html { redirect_to books_path, notice: "Book was successfully destroyed." }
+      format.turbo_stream
+    end
   end
 
   private

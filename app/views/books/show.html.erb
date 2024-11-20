@@ -1,9 +1,12 @@
 <% content_for :title, "Book Details" %>
-<article>
-  <h2><%= @book.title %></h2>
-  <p>Author: <span><%= @book.author %></span></p>
-  <%= link_to "Edit", edit_book_path(@book), class: "button" %>
-  <%= button_to "Delete", @book, method: :delete %>
+<%= turbo_frame_tag dom_id @book do %>
+  <article>
+    <h2><%= @book.title %></h2>
+    <p>Author: <span><%= @book.author %></span></p>
+    <%= link_to "Edit", edit_book_path(@book), class: "button" %>
+    <%= button_to "Delete", @book, method: :delete %>
+    <%= link_to "Back", books_path, class: "button" %>
 
-  <p><%= @book.description %></p>
-</article>
+    <p><%= @book.description %></p>
+  </article>
+<% end %>

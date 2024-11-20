@@ -2,8 +2,12 @@
 
 <%= render "search_form" %>
 
-<%= link_to "New Book", new_book_path, class: "button" %>
+<%= link_to "New Book", new_book_path, class: "button", data: { turbo_frame: "new_book" } %>
 
-<% @books.each do |book| %>
-  <%= render "book", book: book %>
+<%= turbo_frame_tag 'new_book' %>
+
+<%= turbo_frame_tag 'books' do %>
+  <% @books.each do |book| %>
+    <%= render "book", book: book %>
+  <% end %>
 <% end %>
