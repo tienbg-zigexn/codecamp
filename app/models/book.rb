@@ -5,6 +5,8 @@ class Book < ApplicationRecord
 
   scope :ordered, -> { order(id: :desc) }
 
+  broadcasts_to ->(book) { "books" }, inserts_by: :prepend
+
   class << self
     def search(query)
       where("title LIKE '%#{query}%' OR author LIKE '%#{query}%' OR description LIKE '%#{query}%'")
