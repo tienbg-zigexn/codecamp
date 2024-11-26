@@ -1,3 +1,3 @@
 <%= turbo_stream.prepend "books", @book %>
-<%= turbo_stream.remove "new_book" %>
+<%= turbo_stream.update "new_book" %>
 <%= render_turbo_stream_flash_messages %>
