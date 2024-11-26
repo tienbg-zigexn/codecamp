@@ -1,3 +1,4 @@
+<%= turbo_stream_from 'books' %>
 <% content_for :title, "Book List" %>
 
 <%= render "search_form" %>
@@ -7,7 +8,6 @@
 <%= turbo_frame_tag 'new_book' %>
 
 <%= turbo_frame_tag 'books' do %>
-  <%= turbo_stream_from 'books' %>
   <% @books.each do |book| %>
     <%= render "book", book: book %>
   <% end %>

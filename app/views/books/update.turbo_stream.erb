@@ -1,4 +1,4 @@
-<%= turbo_stream.replace dom_id @book do %>
+<%= turbo_stream.update dom_id @book do %>
   <%= render 'book', book: @book %>
 <% end %>
 <%= render_turbo_stream_flash_messages %>
