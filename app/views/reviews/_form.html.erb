@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(@book, "new_review") do %>
+<%= turbo_frame_tag nested_dom_id(@book, "new_review") do %>
   <%= form_with model: [@book, @review] do |f| %>
     <%= f.text_area :content %>
     <%= f.submit "Create Review" %>

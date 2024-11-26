@@ -1,7 +1,7 @@
 <h3>Reviews</h3>
-<%= link_to "New Review", new_book_review_path(@book), class: "button", data: { turbo_frame: dom_id(@book, "new_review") } %>
-<%= turbo_frame_tag dom_id(@book, "new_review") %>
-<%= turbo_frame_tag dom_id(@book, "reviews") do %>
+<%= link_to "New Review", new_book_review_path(@book), class: "button", data: { turbo_frame: nested_dom_id(@book, "new_review") } %>
+<%= turbo_frame_tag nested_dom_id(@book, "new_review") %>
+<%= turbo_frame_tag nested_dom_id(@book, "reviews") do %>
   <% @reviews.each do |review| %>
     <%= render "reviews/review", review: review %>
   <% end %>

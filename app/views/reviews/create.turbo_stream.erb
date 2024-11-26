@@ -1,3 +1,2 @@
-<%= turbo_stream.append dom_id(@book, "reviews"), partial: "review", locals: { review: @review } %>
-<%= turbo_stream.update dom_id(@book, "new_review") %>
+<%= turbo_stream.update nested_dom_id(@book, "new_review") %>
 <%= render_turbo_stream_flash_messages %>
