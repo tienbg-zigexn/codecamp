@@ -8,6 +8,7 @@ class ReviewsController < ApplicationController
 
   def create
     @review = @book.reviews.build(review_params)
+    @review.user = Current.user
 
     if @review.save
       respond_to do |format|

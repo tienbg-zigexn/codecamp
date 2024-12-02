@@ -13,7 +13,18 @@ if Book.count < 10
     Book.create(
       title: Faker::Book.title,
       author: Faker::Book.author,
-      description: Faker::Lorem.paragraphs(number: 2).join('\n')
+      description: Faker::Lorem.paragraphs(number: 3).join('\\n')
+    )
+  end
+end
+
+User.find_or_create_by!(email_address: 'test@mail.org', password: 'password')
+
+if User.count < 10
+  10.times do
+    User.create(
+      email_address: Faker::Internet.email,
+      password: 'password'
     )
   end
 end
@@ -22,7 +33,8 @@ Book.all.each do |book|
   if book.reviews.count < 5
     5.times do
       book.reviews.create(
-        content: Faker::Lorem.sentences(number: 2).join
+        content: Faker::Lorem.sentences(number: 2).join,
+        user: User.all.sample
       )
     end
   end
