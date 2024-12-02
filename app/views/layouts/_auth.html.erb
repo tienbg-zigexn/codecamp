@@ -1,0 +1,7 @@
+<% if authenticated? %>
+  <%= Current.user.email_address %>
+  <%= button_to "Logout", session_path, method: :delete %>
+<% else %>
+  <%= link_to "Login", new_session_path %>
+  <%= link_to "Sign up", new_registration_path %>
+<% end %>
