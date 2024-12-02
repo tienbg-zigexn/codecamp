@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :passwords, param: :token
   root "pages#index"
   resources :books do
     resources :reviews, only: %i[new create destroy]
