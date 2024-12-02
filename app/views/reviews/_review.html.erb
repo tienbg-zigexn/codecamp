@@ -1,4 +1,8 @@
 <%= turbo_frame_tag nested_dom_id(review.book, review) do %>
-  <p><%= review.content %></p>
-  <%= button_to 'Delete', book_review_path(review.book, review), method: :delete %>
+  <div style="display: flex; justify-content: space-between; align-items: baseline;">
+    <p><%= review.content %></p>
+    <% if Current.user == review.user %>
+      <%= link_to 'Delete', book_review_path(review.book, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
 <% end %>

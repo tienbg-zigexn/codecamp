@@ -2,13 +2,15 @@
 <%= turbo_frame_tag dom_id @book do %>
   <%= turbo_stream_from @book %>
   <article>
+    <div style="display: flex; justify-content: space-between;">
+      <%= link_to "Back", books_path %>
+      <div style="display: flex; gap: .5rem;">
+        <%= link_to "Edit", edit_book_path(@book) %>
+        <%= link_to "Delete", @book, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </div>
+    </div>
     <h2><%= @book.title %></h2>
     <p>Author: <span><%= @book.author %></span></p>
-    <div style="display: flex; gap: .5rem;">
-      <%= link_to "Edit", edit_book_path(@book), class: "button" %>
-      <%= button_to "Delete", @book, method: :delete %>
-      <%= link_to "Back", books_path, class: "button" %>
-    </div>
 
     <details>
       <summary>Description</summary>

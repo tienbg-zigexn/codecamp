@@ -1,11 +1,13 @@
 <%= turbo_frame_tag dom_id book do %>
-  <%= link_to book do %>
-    <h3><%= book.title %></h3>
-  <% end %>
+  <div style="display: flex; justify-content: space-between; align-items: baseline;">
+    <%= link_to book do %>
+      <h3><%= book.title %></h3>
+    <% end %>
+    <%= link_to "Delete", book, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </div>
   <p><%= book.author %></p>
   <details>
     <summary>Description</summary>
     <p><%= truncate(book.description, length: 100) %></p>
   </details>
-  <%= button_to "Delete", book, method: :delete %>
 <% end %>
