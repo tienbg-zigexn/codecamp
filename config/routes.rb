@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   root "pages#index"
   resources :books do
-    resources :reviews, only: %i[new create destroy]
+    resources :reviews, only: %i[new show create destroy]
   end
 
   # default rails generated

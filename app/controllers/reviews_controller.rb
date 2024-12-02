@@ -1,9 +1,17 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[destroy]
+  before_action :set_review, only: %i[destroy show]
   before_action :set_book, only: %i[new create]
 
   def new
     @review = @book.reviews.new
+  end
+
+  def show
+    if request.headers["turbo-frame"]
+      render partial: "reviews/review", locals: { review: @review }
+    else
+      render head :bad_request
+    end
   end
 
   def create
