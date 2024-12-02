@@ -19,6 +19,8 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    return head :unauthorized unless @review.user == Current.user
+
     @review.destroy
     respond_to do |format|
       format.html { redirect_to @book, notice: "Review was successfully destroyed." }
