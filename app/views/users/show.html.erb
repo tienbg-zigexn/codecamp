@@ -1,0 +1,17 @@
+<% content_for :title, @user.email_address %>
+<article>
+  <h2>Followers</h2>
+  <ul>
+    <% @user.followers.each do |follower| %>
+      <li><%= follower.email_address %></li>
+    <% end %>
+  </ul>
+</article>
+<article>
+  <h2>Following</h2>
+  <ul>
+    <% @user.following.each do |followed| %>
+      <li><%= followed.email_address %></li>
+    <% end %>
+  </ul>
+</article>

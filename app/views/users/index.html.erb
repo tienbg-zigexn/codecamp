@@ -1,0 +1,12 @@
+<% content_for :title, "Users" %>
+<% @users.each do |user| %>
+  <article>
+    <p>Email: <%= user.email_address %></p>
+    <% user.reviews.each do |review| %>
+      <section>
+        <p>Book: <%= review.book.title %></p>
+        <p>Review: <%= review.content %></p>
+      </section>
+    <% end %>
+  </article>
+<% end %>

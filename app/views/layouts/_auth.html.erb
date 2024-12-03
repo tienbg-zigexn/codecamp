@@ -1,4 +1,5 @@
 <% if authenticated? %>
+  <%= link_to "Profile", Current.user %>
   <%= link_to "Logout", session_url, data: { turbo_method: :delete } %>
 <% else %>
   <%= link_to "Login", new_session_path %>
