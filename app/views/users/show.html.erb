@@ -1,7 +1,9 @@
 <% content_for :title, @user.email_address %>
-<article id="<%= nested_dom_id @user, Current.user, 'follow_status' %>">
-  <%= render "follow_status" %>
-</article>
+<% unless Current.user == @user %>
+  <article id="<%= nested_dom_id @user, Current.user, 'follow_status' %>">
+    <%= render "follow_status" %>
+  </article>
+<% end %>
 <article>
   <h2>Followers</h2>
   <ul>

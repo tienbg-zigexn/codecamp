@@ -1,8 +1,12 @@
 <%= turbo_frame_tag nested_dom_id(review.book, review) do %>
-  <div style="display: flex; justify-content: space-between; align-items: baseline;">
-    <p><%= review.content %></p>
+  <% author = Current.user == review.user ? "me" : review.user.email_address %>
+  <section style="display: flex; justify-content: space-between; align-items: baseline;">
+    <div>
+      <p><%= review.content %></p>
+      <p>By: <%= link_to author, user_path(review.user), data: { turbo: false } %></p>
+    </div>
     <% if Current.user == review.user %>
       <%= link_to 'Delete', book_review_path(review.book, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
     <% end %>
-  </div>
+  </section>
 <% end %>
