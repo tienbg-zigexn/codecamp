@@ -1,0 +1,8 @@
+<article>
+  <h2>Following</h2>
+  <ul id="<%= nested_dom_id @user, 'following' %>">
+    <% @user.following.each do |followed| %>
+      <%= render "follow", user: followed, follow: :following %>
+    <% end %>
+  </ul>
+</article>
