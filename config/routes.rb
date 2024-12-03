@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :books do
     resources :reviews, only: %i[new show create destroy]
   end
-  resources :users, only: %i[index show]
+  resources :users, only: %i[index show] do
+    resource :follows, only: %i[create destroy]
+  end
 
   # default rails generated
   get "up" => "rails/health#show", as: :rails_health_check

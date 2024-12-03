@@ -1,0 +1,7 @@
+<% unless Current.user == @user %>
+  <% if Current.user.following?(@user) %>
+    <%= button_to "Unfollow", user_follows_path(@user), method: :delete, data: { turbo_frame: nested_dom_id(@user, Current.user, 'follow_status') } %>
+  <% else %>
+    <%= button_to "Follow", user_follows_path(@user), data: { turbo_frame: nested_dom_id(@user, Current.user, 'follow_status') } %>
+  <% end %>
+<% end %>
