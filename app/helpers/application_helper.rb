@@ -1,6 +1,6 @@
 module ApplicationHelper
   def render_turbo_stream_flash_messages
-    turbo_stream.prepend "flash", partial: "layouts/flash"
+    turbo_stream.append "flash", partial: "layouts/flash"
   end
 
   def nested_dom_id(*args)

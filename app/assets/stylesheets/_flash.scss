@@ -1,6 +1,22 @@
-.notice.notice {
-  color: green;
-}
-.notice.alert {
-  color: red;
+#flash {
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  .notice {
+    position: relative;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    &__close {
+      position: absolute;
+      right: .5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .alert {
+    color: #e74c3c;
+  }
 }
