@@ -1,6 +1,6 @@
 <%= turbo_frame_tag nested_dom_id(review.book, review) do %>
   <% author = Current.user == review.user ? "me" : review.user.email_address %>
-  <section style="display: flex; justify-content: space-between; align-items: baseline;">
+  <section class="review">
     <div>
       <p><%= review.content %></p>
       <p>By: <%= link_to author, user_path(review.user), data: { turbo: false } %></p>

@@ -1,0 +1,12 @@
+<article>
+  <h2>Reviews</h2>
+  <% @user.reviews.each do |review| %>
+    <section>
+      <h3><%= review.book.title %></h3>
+      <div class='review'>
+        <p><%= review.content %></p>
+        <%= link_to 'Delete', book_review_path(review.book, review), data: { turbo_method: :delete, confirm: 'Are you sure?' } if Current.user == @user %>
+      </div>
+    </section>
+  <% end %>
+</article>
