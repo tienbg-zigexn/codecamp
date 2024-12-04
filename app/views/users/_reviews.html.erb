@@ -1,11 +1,11 @@
-<article>
+<article id="<%= nested_dom_id @user, :reviews %>">
   <h2>Reviews</h2>
   <% @user.reviews.each do |review| %>
-    <section>
+    <section id="<%= nested_dom_id @user, review %>">
       <h3><%= review.book.title %></h3>
       <div class='review'>
         <p><%= review.content %></p>
-        <%= link_to 'Delete', book_review_path(review.book, review), data: { turbo_method: :delete, confirm: 'Are you sure?' } if Current.user == @user %>
+        <%= link_to 'Delete', book_review_path(review.book, review), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } if Current.user == @user %>
       </div>
     </section>
   <% end %>
