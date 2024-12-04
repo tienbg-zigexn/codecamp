@@ -2,7 +2,7 @@
   <h2>Followers</h2>
   <ul id="<%= nested_dom_id @user, 'followers' %>">
     <% @user.followers.each do |follower| %>
-      <%= render "follow", user: follower, follow: :follower %>
+      <%= render "follow", user: follower, relationship: :passive %>
     <% end %>
   </ul>
 </article>
