@@ -6,9 +6,9 @@ class FollowsController < ApplicationController
 
     if Current.user.follow @user
       respond_to do |format|
-        format.html { redirect_to @user, notice: "Followed successfully" }
+        format.html { redirect_to @user, notice: "Followed #{@user.email_address}" }
         format.turbo_stream do
-          flash.now[:notice] = "Followed successfully"
+          flash.now[:notice] = "Followed #{@user.email_address}"
           render turbo_stream: [
             turbo_stream.update(helpers.nested_dom_id(@user, Current.user, 'follow_status'), partial: 'users/follow_status'),
             helpers.render_turbo_stream_flash_messages
@@ -17,9 +17,9 @@ class FollowsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to @user, alert: "Follow failed" }
+        format.html { redirect_to @user, alert: "Failed to follow #{@user.email_address}" }
         format.turbo_stream do
-          flash.now[:alert] = "Follow failed"
+          flash.now[:alert] = "Failed to follow #{@user.email_address}"
           render turbo_stream: helpers.render_turbo_stream_flash_messages
         end
       end
@@ -31,9 +31,9 @@ class FollowsController < ApplicationController
 
     if Current.user.unfollow @user
       respond_to do |format|
-        format.html { redirect_to @user, notice: "Unfollowed successfully" }
+        format.html { redirect_to @user, notice: "Unfollowed #{@user.email_address}" }
         format.turbo_stream do
-          flash.now[:notice] = "Unfollowed successfully"
+          flash.now[:notice] = "Unfollowed #{@user.email_address}"
           render turbo_stream: [
             turbo_stream.update(helpers.nested_dom_id(@user, Current.user, 'follow_status'), partial: 'users/follow_status'),
             helpers.render_turbo_stream_flash_messages
@@ -42,9 +42,9 @@ class FollowsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to @user, alert: "Follow failed" }
+        format.html { redirect_to @user, alert: "Failed to unfollow #{@user.email_address}" }
         format.turbo_stream do
-          flash.now[:alert] = "Unfollow failed"
+          flash.now[:alert] = "Failed to unfollow #{@user.email_address}"
           render turbo_stream: helpers.render_turbo_stream_flash_messages
         end
       end
