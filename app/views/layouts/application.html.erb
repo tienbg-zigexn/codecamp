@@ -18,14 +18,14 @@
   </head>
 
   <body>
-    <header>
+    <header role="banner">
       <nav>
         <%= render 'layouts/links' %>
         <%= render 'layouts/auth' %>
       </nav>
       <h1><%= yield :title %></h1>
     </header>
-    <main>
+    <main role="content">
       <div id="flash">
         <%= render 'layouts/flash' %>
       </div>
