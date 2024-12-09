@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_02_133559) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_09_211834) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -36,6 +36,20 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_02_133559) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "recipient_id", null: false
+    t.integer "actor_id", null: false
+    t.string "action"
+    t.string "notifiable_type", null: false
+    t.integer "notifiable_id", null: false
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -77,6 +91,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_02_133559) do
 
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "notifications", "users", column: "actor_id"
+  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
   add_foreign_key "sessions", "users"

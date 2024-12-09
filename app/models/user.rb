@@ -9,9 +9,11 @@ class User < ApplicationRecord
   has_many :passive_follows, class_name: 'Follow', foreign_key: :followed_id, dependent: :destroy
   has_many :followers, through: :passive_follows, source: :follower
 
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: :actor_id, dependent: :destroy
+  has_many :received_notifications, class_name: 'Notification', foreign_key: :recipient_id, dependent: :destroy
+
   EMAIL_REGEX = /\A[a-zA-Z0-9.!\#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+\z/.freeze
   validates :email_address, presence: true, uniqueness: true, format: { with: EMAIL_REGEX }
-
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   def follow(other_user)
