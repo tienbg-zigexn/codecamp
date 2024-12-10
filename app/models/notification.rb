@@ -23,7 +23,7 @@ class Notification < ApplicationRecord
   end
 
   def message
-    case self.notifiable
+    case self.notifiable_type
     when 'User'
       "#{self.actor.email_address} #{self.action} #{self.notifiable == self.recipient ? 'you.' : self.notifiable.email_address}"
     when 'Review'
