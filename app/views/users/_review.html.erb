@@ -1,0 +1,7 @@
+<section id="<%= nested_dom_id review.user, review %>">
+  <h3><%= review.book.title %></h3>
+  <div class='review'>
+    <p><%= review.content %></p>
+    <%= link_to 'Delete', book_review_path(review.book, review), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } if Current.user == review.user %>
+  </div>
+</section>
