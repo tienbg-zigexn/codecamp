@@ -25,7 +25,7 @@ module BookReview
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.generators do |g|
-      g.test_framework false
+      g.test_framework nil
     end
   end
 end
