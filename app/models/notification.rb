@@ -3,6 +3,8 @@ class Notification < ApplicationRecord
   belongs_to :actor, class_name: 'User'
   belongs_to :notifiable, polymorphic: true
 
+  include Helpers::DomHelper
+
   scope :unread, -> { where(read_at: nil) }
 
   def read
@@ -12,8 +14,6 @@ class Notification < ApplicationRecord
   after_create_commit :broadcast_notification
 
   private
-
-  include Helpers::DomHelper
 
   def broadcast_notification
     broadcast_append_later_to nested_dom_id(self.recipient, 'notifications'),
