@@ -5,11 +5,19 @@ class Review < ApplicationRecord
 
   scope :ordered, -> { order(created_at: :desc) }
 
+  after_create_commit :broadcast_review_after_create
+  after_destroy_commit :broadcast_review_after_destroy
+
   include Helpers::DomHelper
 
-  after_create_commit ->(review) { broadcast_prepend_later_to review.book, partial: 'reviews/review_frame', target: nested_dom_id(review.book, 'reviews') }
-  after_destroy_commit ->(review) {
-    broadcast_remove_to review.book, target: nested_dom_id(review.book, review)
-    broadcast_remove_to review.user, target: nested_dom_id(review.user, review)
-  }
+  private
+
+  def broadcast_review_after_create
+    broadcast_prepend_later_to self.book, partial: 'reviews/review_frame', target: nested_dom_id(self.book, 'reviews')
+  end
+
+  def broadcast_review_after_destroy
+    broadcast_remove_to self.book, target: nested_dom_id(self.book, self)
+    broadcast_remove_to self.user, target: nested_dom_id(self.user, self)
+  end
 end

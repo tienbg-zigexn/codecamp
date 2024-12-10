@@ -3,15 +3,15 @@ class Notification < ApplicationRecord
   belongs_to :actor, class_name: 'User'
   belongs_to :notifiable, polymorphic: true
 
-  include Helpers::DomHelper
+  after_create_commit :broadcast_notification
 
   scope :unread, -> { where(read_at: nil) }
+
+  include Helpers::DomHelper
 
   def read
     update(read_at: Time.current)
   end
-
-  after_create_commit :broadcast_notification
 
   private
 
