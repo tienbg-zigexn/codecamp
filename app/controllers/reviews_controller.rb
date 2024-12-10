@@ -19,9 +19,10 @@ class ReviewsController < ApplicationController
     @review.user = Current.user
 
     if @review.save
-      Current.user.followers.each do |follower|
-        CreateNotificationJob.perform_later(follower, Current.user, 'posted', @review)
+      create_notification_jobs = Current.user.followers.map do |follower|
+        CreateNotificationJob.new(follower, Current.user, 'posted', @review)
       end
+      ActiveJob.perform_all_later(create_notification_jobs)
       respond_to do |format|
         format.html { redirect_to @book, notice: "Review was successfully created." }
         format.turbo_stream { flash.now[:notice] = "Review was successfully created." }
