@@ -29,6 +29,8 @@ if User.count < 10
   10.times do
     User.create(
       email_address: Faker::Internet.email,
+      username: Faker::Internet.username,
+      display_name: Faker::Name.name,
       password: 'password',
     )
   end
