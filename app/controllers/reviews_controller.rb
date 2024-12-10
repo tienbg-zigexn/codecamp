@@ -19,6 +19,9 @@ class ReviewsController < ApplicationController
     @review.user = Current.user
 
     if @review.save
+      Current.user.followers.each do |follower|
+        CreateNotificationJob.perform_later(follower, Current.user, 'posted', @review)
+      end
       respond_to do |format|
         format.html { redirect_to @book, notice: "Review was successfully created." }
         format.turbo_stream { flash.now[:notice] = "Review was successfully created." }
