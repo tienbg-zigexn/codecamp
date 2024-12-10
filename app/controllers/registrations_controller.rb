@@ -6,12 +6,18 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    user = User.new(params.permit(:email_address, :password))
+    user = User.new(registration_params)
     if user.save
       start_new_session_for user
       redirect_to after_authentication_url, notice: "Signed up."
     else
       redirect_to new_registration_path, alert: "Try another email address or password."
     end
+  end
+
+  private
+
+  def registration_params
+    params.permit(:email_address, :username, :display_name, :password)
   end
 end

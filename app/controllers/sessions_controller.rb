@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
+    if user = authenticate_user
       start_new_session_for user
       redirect_to after_authentication_url, notice: "Signed in."
     else
@@ -17,5 +17,12 @@ class SessionsController < ApplicationController
   def destroy
     terminate_session
     redirect_to new_session_path, notice: "Signed out."
+  end
+
+  def authenticate_user
+    username = params[:username]
+    password = params[:password]
+    User.authenticate_by(username:, password:) ||
+      User.authenticate_by(email_address: username, password:)
   end
 end
