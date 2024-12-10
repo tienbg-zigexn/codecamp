@@ -2,7 +2,7 @@ class Follow < ApplicationRecord
   belongs_to :followed, class_name: "User"
   belongs_to :follower, class_name: "User"
 
-  include DomHelper
+  include Helpers::DomHelper
 
   after_create_commit ->(follow) {
     broadcast_append_to follow.followed, partial: "users/follow", target: nested_dom_id(follow.followed, "followers"), locals: { current_user: follow.followed, other_user: follow.follower, relationship: :passive }

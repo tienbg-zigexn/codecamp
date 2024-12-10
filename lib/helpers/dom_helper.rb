@@ -1,4 +1,4 @@
-module DomHelper
+module Helpers::DomHelper
   include ActionView::RecordIdentifier unless defined?(dom_id)
 
   def nested_dom_id(*args)

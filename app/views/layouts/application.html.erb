@@ -18,6 +18,7 @@
   </head>
 
   <body>
+    <%= turbo_stream_from nested_dom_id(Current.user, 'notifications') if authenticated? %>
     <header role="banner">
       <nav>
         <%= render 'layouts/links' %>

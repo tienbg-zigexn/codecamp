@@ -5,6 +5,7 @@ class FollowsController < ApplicationController
     return head :bad_request if Current.user == @user
 
     if Current.user.follow @user
+      Services::NotificationCreator.perform(@user, Current.user, 'followed', @user)
       respond_to do |format|
         format.html { redirect_to @user, notice: "Followed #{@user.email_address}" }
         format.turbo_stream do
@@ -30,6 +31,7 @@ class FollowsController < ApplicationController
     return head :bad_request if Current.user == @user
 
     if Current.user.unfollow @user
+      Services::NotificationCreator.perform(@user, Current.user, 'unfollowed', @user)
       respond_to do |format|
         format.html { redirect_to @user, notice: "Unfollowed #{@user.email_address}" }
         format.turbo_stream do

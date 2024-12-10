@@ -5,7 +5,7 @@ class Review < ApplicationRecord
 
   scope :ordered, -> { order(created_at: :desc) }
 
-  include DomHelper
+  include Helpers::DomHelper
 
   after_create_commit ->(review) { broadcast_prepend_later_to review.book, partial: 'reviews/review_frame', target: nested_dom_id(review.book, 'reviews') }
   after_destroy_commit ->(review) {
