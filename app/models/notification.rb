@@ -7,8 +7,6 @@ class Notification < ApplicationRecord
 
   scope :unread, -> { where(read_at: nil) }
 
-  include Helpers::DomHelper
-
   def read
     update(read_at: Time.current)
   end
@@ -25,6 +23,8 @@ class Notification < ApplicationRecord
   end
 
   private
+
+  include Helpers::DomHelper
 
   def broadcast_notification
     broadcast_append_later_to nested_dom_id(self.recipient, 'notifications'),

@@ -5,9 +5,9 @@ class Follow < ApplicationRecord
   after_create_commit :broadcast_follow_after_create
   after_destroy_commit :broadcast_follow_after_destroy
 
-  include Helpers::DomHelper
-
   private
+
+  include Helpers::DomHelper
 
   def broadcast_follow_after_create
     broadcast_append_later_to self.followed, partial: "users/follow",

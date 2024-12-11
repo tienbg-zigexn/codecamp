@@ -8,9 +8,9 @@ class Review < ApplicationRecord
   after_create_commit :broadcast_review_after_create
   after_destroy_commit :broadcast_review_after_destroy
 
-  include Helpers::DomHelper
-
   private
+
+  include Helpers::DomHelper
 
   def broadcast_review_after_create
     broadcast_prepend_later_to self.book, partial: 'reviews/review_frame', target: nested_dom_id(self.book, 'reviews')
