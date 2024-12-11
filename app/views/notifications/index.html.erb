@@ -1,0 +1,14 @@
+<% content_for :title, pluralize(@notifications.count, 'Notification') %>
+<%= turbo_stream_from nested_dom_id Current.user, 'notifications' %>
+<% @notifications.each do |notification| %>
+  <%= render "notification", notification: %>
+<% end %>
+
+<style>
+.notification {
+  text-decoration: none;
+}
+.notification.read {
+  color: var(--text-light);
+}
+</style>

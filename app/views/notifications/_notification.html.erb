@@ -1,0 +1,5 @@
+<%= link_to user_notification_path(Current.user, notification), class: "notification unread", id: nested_dom_id(Current.user, notification) do %>
+  <article>
+    <p><%= notification.message %></p>
+  </article>
+<% end %>

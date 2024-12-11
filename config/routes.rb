@@ -8,6 +8,14 @@ Rails.application.routes.draw do
   end
   resources :users, only: %i[index show] do
     resource :follows, only: %i[create destroy]
+    resources :notifications, only: %i[index show] do
+      member do
+        post 'mark_as_read', to: 'notifications#mark_as_read'
+      end
+      collection do
+        post 'mark_all_as_read', to: 'notifications#mark_all_as_read'
+      end
+    end
   end
 
   # default rails generated

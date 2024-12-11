@@ -1,0 +1,4 @@
+<% if authenticated? && !current_page?(user_notifications_path(Current.user)) %>
+  <% number_of_notifications = Current.user.received_notifications.unread.count %>
+  <%= link_to pluralize(number_of_notifications, 'Notification'), user_notifications_path(Current.user) %>
+<% end %>

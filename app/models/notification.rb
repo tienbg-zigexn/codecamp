@@ -13,15 +13,6 @@ class Notification < ApplicationRecord
     update(read_at: Time.current)
   end
 
-  private
-
-  def broadcast_notification
-    broadcast_append_later_to nested_dom_id(self.recipient, 'notifications'),
-      target: 'flash', partial: 'layouts/flash_item', locals: { type: 'notice',
-                                                                msg: message
-      }
-  end
-
   def message
     case self.notifiable_type
     when 'User'
@@ -31,5 +22,14 @@ class Notification < ApplicationRecord
     else
       "#{self.actor.username} #{self.action} #{self.notifiable.to_s}."
     end
+  end
+
+  private
+
+  def broadcast_notification
+    broadcast_append_later_to nested_dom_id(self.recipient, 'notifications'),
+      target: 'flash', partial: 'layouts/flash_item', locals: { type: 'notice',
+                                                                msg: message
+      }
   end
 end
