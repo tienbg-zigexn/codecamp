@@ -23,7 +23,7 @@ if Book.count < 10
   end
 end
 
-User.find_or_create_by!(email_address: 'test@mail.org', password_digest: digest_password('password'))
+User.find_or_create_by!(email_address: 'test@mail.org', username: 'tiendeptrai1', display_name: 'Tien dep trai first', password_digest: digest_password('password'))
 
 if User.count < 10
   10.times do
